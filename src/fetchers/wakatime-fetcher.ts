@@ -1,5 +1,4 @@
-import axios from "axios";
-import { CustomError, MissingParamError } from "../common/utils.js";
+import { CustomError, fetchJson, MissingParamError } from "../common/utils.js";
 import type { WakaTimeData } from "./types.js";
 
 /**
@@ -20,7 +19,7 @@ const fetchWakatimeStats = async ({
   }
 
   try {
-    const { data } = await axios.get(
+    const { data } = await fetchJson(
       `https://${
         api_domain ? api_domain.replace(/\/$/gi, "") : "wakatime.com"
       }/api/v1/users/${username}/stats?is_including_today=true`,

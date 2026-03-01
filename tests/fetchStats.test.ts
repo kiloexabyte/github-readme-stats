@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import { calculateRank } from "../src/calculateRank.js";
 import { fetchStats } from "../src/fetchers/stats-fetcher.js";
 import { expect, it, describe, beforeEach, afterEach } from "@jest/globals";
+import FetchMock from "./fetchMock.js";
 
 // Test parameters.
 const data_stats = {
@@ -86,14 +85,14 @@ const error = {
   ],
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 beforeEach(() => {
   process.env.FETCH_MULTI_PAGE_STARS = "false"; // Set to `false` to fetch only one page of stars.
   mock.onPost("https://api.github.com/graphql").reply((cfg) => {
     return [
       200,
-      cfg.data.includes("contributionsCollection") ? data_stats : data_repo,
+      cfg.body.includes("contributionsCollection") ? data_stats : data_repo,
     ];
   });
 });

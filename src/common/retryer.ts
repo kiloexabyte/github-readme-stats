@@ -1,11 +1,11 @@
-import type { AxiosResponse } from "axios";
+import type { ApiResponse } from "./utils.js";
 import { CustomError, logger } from "./utils.js";
 
 type FetcherFunction = (
   variables: object,
   token: string,
   retries?: number,
-) => Promise<AxiosResponse>;
+) => Promise<ApiResponse>;
 
 // Script variables.
 
@@ -22,7 +22,7 @@ const retryer = async (
   fetcher: FetcherFunction,
   variables: object,
   retries = 0,
-): Promise<AxiosResponse> => {
+): Promise<ApiResponse> => {
   if (!RETRIES) {
     throw new CustomError("No GitHub API tokens found", CustomError.NO_TOKENS);
   }

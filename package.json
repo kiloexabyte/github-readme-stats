@@ -19,21 +19,21 @@
     "url": "https://github.com/anuraghazra/github-readme-stats.git"
   },
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "test:update:snapshot": "node --experimental-vm-modules node_modules/jest/bin/jest.js -u",
-    "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.e2e.config.js",
-    "typecheck": "tsc --noEmit",
-    "dev": "tsx express.ts",
-    "theme-readme-gen": "tsx scripts/generate-theme-doc.ts",
-    "preview-theme": "tsx scripts/preview-theme.ts",
-    "close-stale-theme-prs": "tsx scripts/close-stale-theme-prs.ts",
-    "generate-langs-json": "tsx scripts/generate-langs-json.ts",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' bun jest --coverage",
+    "test:watch": "NODE_OPTIONS='--experimental-vm-modules' bun jest --watch",
+    "test:update:snapshot": "NODE_OPTIONS='--experimental-vm-modules' bun jest -u",
+    "test:e2e": "NODE_OPTIONS='--experimental-vm-modules' bun jest --config jest.e2e.config.js",
+    "typecheck": "bunx tsc --noEmit",
+    "dev": "bun express.ts",
+    "theme-readme-gen": "bun scripts/generate-theme-doc.ts",
+    "preview-theme": "bun scripts/preview-theme.ts",
+    "close-stale-theme-prs": "bun scripts/close-stale-theme-prs.ts",
+    "generate-langs-json": "bun scripts/generate-langs-json.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "lint": "npx eslint --max-warnings 0 \"./src/**/*.ts\" \"./scripts/**/*.ts\" \"./tests/**/*.ts\" \"./api/**/*.ts\" \"./themes/**/*.ts\"",
-    "bench": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.bench.config.js"
+    "lint": "bunx eslint --max-warnings 0 \"./src/**/*.ts\" \"./scripts/**/*.ts\" \"./tests/**/*.ts\" \"./api/**/*.ts\" \"./themes/**/*.ts\"",
+    "bench": "NODE_OPTIONS='--experimental-vm-modules' bun jest --config jest.bench.config.js"
   },
   "author": "Anurag Hazra",
   "license": "MIT",
@@ -49,7 +49,6 @@
     "@typescript-eslint/parser": "^8.56.1",
     "@uppercod/css-to-object": "^1.1.1",
     "@vercel/node": "^5.6.9",
-    "axios-mock-adapter": "^2.1.0",
     "color-contrast-checker": "^2.1.0",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
@@ -66,11 +65,9 @@
     "parse-diff": "^0.11.1",
     "prettier": "^3.6.0",
     "ts-jest": "^29.4.6",
-    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "axios": "^1.10.0",
     "dotenv": "^16.5.0",
     "emoji-name-map": "^1.2.8",
     "express": "^5.2.1",
@@ -82,6 +79,6 @@
     "*.{ts,js,css,md}": "prettier --write"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "bun": ">=1.0.0"
   }
 }

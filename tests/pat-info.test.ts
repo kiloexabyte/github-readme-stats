@@ -5,13 +5,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { jest } from "@jest/globals";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import patInfo, { RATE_LIMIT_SECONDS } from "../api/status/pat-info.js";
 import { expect, it, describe, afterEach, beforeAll } from "@jest/globals";
+import FetchMock from "./fetchMock.js";
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 const successData = {
   data: {

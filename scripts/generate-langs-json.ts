@@ -1,17 +1,16 @@
-import axios from "axios";
 import fs from "fs";
 import jsYaml from "js-yaml";
 
 const LANGS_FILEPATH = "./src/common/languageColors.json";
 
 //Retrieve languages from github linguist repository yaml file
-axios
-  .get(
-    "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml",
-  )
-  .then((response) => {
+fetch(
+  "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml",
+)
+  .then((response) => response.text())
+  .then((text) => {
     //and convert them to a JS Object
-    const languages = jsYaml.load(response.data) as Record<string, any>;
+    const languages = jsYaml.load(text) as Record<string, any>;
 
     const languageColors: Record<string, string> = {};
 

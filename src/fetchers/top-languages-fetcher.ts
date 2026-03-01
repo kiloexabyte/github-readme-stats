@@ -6,7 +6,7 @@ import {
   request,
   wrapTextMultiline,
 } from "../common/utils.js";
-import type { AxiosRequestHeaders, AxiosResponse } from "axios";
+import type { ApiResponse } from "../common/utils.js";
 import type { TopLangData } from "./types.js";
 
 /**
@@ -17,9 +17,9 @@ import type { TopLangData } from "./types.js";
  * @returns {Promise<AxiosResponse>} Languages fetcher response.
  */
 const fetcher = (
-  variables: AxiosRequestHeaders,
+  variables: Record<string, string>,
   token: string,
-): Promise<AxiosResponse> => {
+): Promise<ApiResponse> => {
   return request(
     {
       query: `

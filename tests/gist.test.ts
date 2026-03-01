@@ -1,12 +1,11 @@
 import { jest } from "@jest/globals";
 import "@testing-library/jest-dom";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { expect, it, describe, afterEach } from "@jest/globals";
 import { renderGistCard } from "../src/cards/gist-card.js";
 import { renderError } from "../src/common/utils.js";
 import gist from "../api/gist.js";
+import FetchMock from "./fetchMock.js";
 
 const gist_data = {
   data: {
@@ -43,7 +42,7 @@ const gist_not_found_data = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 afterEach(() => {
   mock.reset();

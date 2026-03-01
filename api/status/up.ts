@@ -6,7 +6,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import type { AxiosResponse } from "axios";
+import type { ApiResponse } from "../../src/common/utils.js";
 import retryer from "../../src/common/retryer.js";
 import { logger, request } from "../../src/common/utils.js";
 
@@ -18,7 +18,7 @@ export const RATE_LIMIT_SECONDS = 60 * 5; // 1 request per 5 minutes
 const uptimeFetcher = (
   variables: any,
   token: string,
-): Promise<AxiosResponse> => {
+): Promise<ApiResponse> => {
   return request(
     {
       query: `

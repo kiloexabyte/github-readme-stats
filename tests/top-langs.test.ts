@@ -1,12 +1,11 @@
 import { jest } from "@jest/globals";
 import "@testing-library/jest-dom";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import topLangs from "../api/top-langs.js";
 import { renderTopLanguages } from "../src/cards/top-languages-card.js";
 import { renderError } from "../src/common/utils.js";
 import { expect, it, describe, afterEach } from "@jest/globals";
+import FetchMock from "./fetchMock.js";
 
 const data_langs = {
   data: {
@@ -67,7 +66,7 @@ const langs = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 afterEach(() => {
   mock.reset();

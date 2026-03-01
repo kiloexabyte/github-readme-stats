@@ -1,16 +1,16 @@
-import axios from "axios";
 import * as dotenv from "dotenv";
 import githubUsernameRegex from "github-username-regex";
 import { calculateRank } from "../calculateRank.js";
 import { retryer } from "../common/retryer.js";
 import {
   CustomError,
+  fetchJson,
   logger,
   MissingParamError,
   request,
   wrapTextMultiline,
 } from "../common/utils.js";
-import type { AxiosResponse } from "axios";
+import type { ApiResponse } from "../common/utils.js";
 import type { StatsData } from "./types.js";
 
 dotenv.config();
@@ -83,9 +83,9 @@ const GRAPHQL_STATS_QUERY = `
  *
  * @param {object} variables Fetcher variables.
  * @param {string} token GitHub token.
- * @returns {Promise<AxiosResponse>} Axios response.
+ * @returns {Promise<ApiResponse>} Axios response.
  */
-const fetcher = (variables: object, token: string): Promise<AxiosResponse> => {
+const fetcher = (variables: object, token: string): Promise<ApiResponse> => {
   const query = (variables as any).after
     ? GRAPHQL_REPOS_QUERY
     : GRAPHQL_STATS_QUERY;
@@ -108,7 +108,7 @@ const fetcher = (variables: object, token: string): Promise<AxiosResponse> => {
  * @param {boolean} variables.includeMergedPullRequests Include merged pull requests.
  * @param {boolean} variables.includeDiscussions Include discussions.
  * @param {boolean} variables.includeDiscussionsAnswers Include discussions answers.
- * @returns {Promise<AxiosResponse>} Axios response.
+ * @returns {Promise<ApiResponse>} Axios response.
  *
  * @description This function supports multi-page fetching if the 'FETCH_MULTI_PAGE_STARS' environment variable is set to true.
  */
@@ -122,8 +122,8 @@ const statsFetcher = async ({
   includeMergedPullRequests: boolean;
   includeDiscussions: boolean;
   includeDiscussionsAnswers: boolean;
-}): Promise<AxiosResponse> => {
-  let stats: AxiosResponse | undefined;
+}): Promise<ApiResponse> => {
+  let stats: ApiResponse | undefined;
   let hasNextPage = true;
   let endCursor: string | null = null;
   while (hasNextPage) {
@@ -179,15 +179,16 @@ const totalCommitsFetcher = async (username: string): Promise<number> => {
 
   // https://developer.github.com/v3/search/#search-commits
   const fetchTotalCommits = (variables: any, token: string) => {
-    return axios({
-      method: "get",
-      url: `https://api.github.com/search/commits?q=author:${variables.login}`,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/vnd.github.cloak-preview",
-        Authorization: `token ${token}`,
+    return fetchJson(
+      `https://api.github.com/search/commits?q=author:${variables.login}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/vnd.github.cloak-preview",
+          Authorization: `token ${token}`,
+        },
       },
-    });
+    );
   };
 
   let res;

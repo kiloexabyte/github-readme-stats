@@ -1,11 +1,10 @@
 import { jest } from "@jest/globals";
 import "@testing-library/jest-dom";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import wakatime from "../api/wakatime.js";
 import { renderWakatimeCard } from "../src/cards/wakatime-card.js";
 import { expect, it, describe, afterEach } from "@jest/globals";
+import FetchMock from "./fetchMock.js";
 
 const wakaTimeData = {
   data: {
@@ -99,7 +98,7 @@ const wakaTimeData = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 afterEach(() => {
   mock.reset();

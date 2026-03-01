@@ -1,9 +1,8 @@
 import { benchmarkSuite } from "jest-bench";
 import pin from "../../api/pin.js";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { jest } from "@jest/globals";
+import FetchMock from "../fetchMock.js";
 
 const data_repo = {
   repository: {
@@ -30,7 +29,7 @@ const data_user = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 mock.onPost("https://api.github.com/graphql").reply(200, data_user);
 
 benchmarkSuite("test /api/pin", {

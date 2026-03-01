@@ -1,6 +1,6 @@
 import { retryer } from "../common/retryer.js";
 import { MissingParamError, request } from "../common/utils.js";
-import type { AxiosRequestHeaders, AxiosResponse } from "axios";
+import type { ApiResponse } from "../common/utils.js";
 import type { RepositoryData } from "./types.js";
 
 /**
@@ -11,9 +11,9 @@ import type { RepositoryData } from "./types.js";
  * @returns {Promise<AxiosResponse>} The response.
  */
 const fetcher = (
-  variables: AxiosRequestHeaders,
+  variables: Record<string, string>,
   token: string,
-): Promise<AxiosResponse> => {
+): Promise<ApiResponse> => {
   return request(
     {
       query: `

@@ -1,9 +1,8 @@
 import { benchmarkSuite } from "jest-bench";
 import gist from "../../api/gist.js";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { jest } from "@jest/globals";
+import FetchMock from "../fetchMock.js";
 
 const gist_data = {
   data: {
@@ -32,7 +31,7 @@ const gist_data = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 mock.onPost("https://api.github.com/graphql").reply(200, gist_data);
 
 benchmarkSuite("test /api/gist", {

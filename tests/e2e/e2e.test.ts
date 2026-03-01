@@ -4,7 +4,6 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import axios from "axios";
 import { renderRepoCard } from "../../src/cards/repo-card.js";
 import { renderStatsCard } from "../../src/cards/stats-card.js";
 import { renderTopLanguages } from "../../src/cards/top-languages-card.js";
@@ -117,7 +116,7 @@ describe("Fetch Cards", () => {
 
     // Check if the Vercel preview instance stats card function is up and running.
     await expect(
-      axios.get(`${VERCEL_PREVIEW_URL}/api?username=${STATS_CARD_USER}`),
+      fetch(`${VERCEL_PREVIEW_URL}/api?username=${STATS_CARD_USER}`),
     ).resolves.not.toThrow();
 
     // Get local stats card.
@@ -126,12 +125,12 @@ describe("Fetch Cards", () => {
     });
 
     // Get the Vercel preview stats card response.
-    const serverStatsSvg = await axios.get(
+    const serverStatsSvg = await fetch(
       `${VERCEL_PREVIEW_URL}/api?username=${STATS_CARD_USER}&include_all_commits=true&${CACHE_BURST_STRING}`,
     );
 
     // Check if stats card from deployment matches the stats card from local.
-    expect(serverStatsSvg.data).toEqual(localStatsCardSVG);
+    expect(await serverStatsSvg.text()).toEqual(localStatsCardSVG);
   }, 15000);
 
   test("retrieve language card", async () => {
@@ -142,7 +141,7 @@ describe("Fetch Cards", () => {
       `${VERCEL_PREVIEW_URL}/api/top-langs/?username=${USER}&${CACHE_BURST_STRING}`,
     );
     await expect(
-      axios.get(
+      fetch(
         `${VERCEL_PREVIEW_URL}/api/top-langs/?username=${USER}&${CACHE_BURST_STRING}`,
       ),
     ).resolves.not.toThrow();
@@ -151,12 +150,12 @@ describe("Fetch Cards", () => {
     const localLanguageCardSVG = renderTopLanguages(LANGS_DATA);
 
     // Get the Vercel preview language card response.
-    const severLanguageSVG = await axios.get(
+    const severLanguageSVG = await fetch(
       `${VERCEL_PREVIEW_URL}/api/top-langs/?username=${USER}&${CACHE_BURST_STRING}`,
     );
 
     // Check if language card from deployment matches the local language card.
-    expect(severLanguageSVG.data).toEqual(localLanguageCardSVG);
+    expect(await severLanguageSVG.text()).toEqual(localLanguageCardSVG);
   }, 15000);
 
   test("retrieve WakaTime card", async () => {
@@ -164,19 +163,19 @@ describe("Fetch Cards", () => {
 
     // Check if the Vercel preview instance WakaTime function is up and running.
     await expect(
-      axios.get(`${VERCEL_PREVIEW_URL}/api/wakatime?username=${USER}`),
+      fetch(`${VERCEL_PREVIEW_URL}/api/wakatime?username=${USER}`),
     ).resolves.not.toThrow();
 
     // Get local WakaTime card.
     const localWakaCardSVG = renderWakatimeCard(WAKATIME_DATA);
 
     // Get the Vercel preview WakaTime card response.
-    const serverWakaTimeSvg = await axios.get(
+    const serverWakaTimeSvg = await fetch(
       `${VERCEL_PREVIEW_URL}/api/wakatime?username=${USER}&${CACHE_BURST_STRING}`,
     );
 
     // Check if WakaTime card from deployment matches the local WakaTime card.
-    expect(serverWakaTimeSvg.data).toEqual(localWakaCardSVG);
+    expect(await serverWakaTimeSvg.text()).toEqual(localWakaCardSVG);
   }, 15000);
 
   test("retrieve repo card", async () => {
@@ -184,7 +183,7 @@ describe("Fetch Cards", () => {
 
     // Check if the Vercel preview instance Repo function is up and running.
     await expect(
-      axios.get(
+      fetch(
         `${VERCEL_PREVIEW_URL}/api/pin/?username=${USER}&repo=${REPO}&${CACHE_BURST_STRING}`,
       ),
     ).resolves.not.toThrow();
@@ -193,12 +192,12 @@ describe("Fetch Cards", () => {
     const localRepoCardSVG = renderRepoCard(REPOSITORY_DATA);
 
     // Get the Vercel preview repo card response.
-    const serverRepoSvg = await axios.get(
+    const serverRepoSvg = await fetch(
       `${VERCEL_PREVIEW_URL}/api/pin/?username=${USER}&repo=${REPO}&${CACHE_BURST_STRING}`,
     );
 
     // Check if Repo card from deployment matches the local Repo card.
-    expect(serverRepoSvg.data).toEqual(localRepoCardSVG);
+    expect(await serverRepoSvg.text()).toEqual(localRepoCardSVG);
   }, 15000);
 
   test("retrieve gist card", async () => {
@@ -206,7 +205,7 @@ describe("Fetch Cards", () => {
 
     // Check if the Vercel preview instance Gist function is up and running.
     await expect(
-      axios.get(
+      fetch(
         `${VERCEL_PREVIEW_URL}/api/gist?id=${GIST_ID}&${CACHE_BURST_STRING}`,
       ),
     ).resolves.not.toThrow();
@@ -215,11 +214,11 @@ describe("Fetch Cards", () => {
     const localGistCardSVG = renderGistCard(GIST_DATA);
 
     // Get the Vercel preview gist card response.
-    const serverGistSvg = await axios.get(
+    const serverGistSvg = await fetch(
       `${VERCEL_PREVIEW_URL}/api/gist?id=${GIST_ID}&${CACHE_BURST_STRING}`,
     );
 
     // Check if Gist card from deployment matches the local Gist card.
-    expect(serverGistSvg.data).toEqual(localGistCardSVG);
+    expect(await serverGistSvg.text()).toEqual(localGistCardSVG);
   }, 15000);
 });

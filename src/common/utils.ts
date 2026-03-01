@@ -1,5 +1,3 @@
-import type { AxiosRequestConfig } from "axios";
-import axios from "axios";
 import toEmoji from "emoji-name-map";
 import wrap from "word-wrap";
 import { themes } from "../../themes/index.js";
@@ -205,17 +203,58 @@ export type CardColors = {
 };
 
 /**
+ * Response shape compatible with the old axios interface.
+ */
+interface ApiResponse<T = any> {
+  data: T;
+  status: number;
+  statusText: string;
+}
+
+/**
+ * Error class for non-2xx fetch responses, with a `.response` property
+ * matching the ApiResponse shape so callers can inspect status/data.
+ */
+class ApiError extends Error {
+  response: ApiResponse;
+  constructor(response: ApiResponse) {
+    super(`Request failed with status ${response.status}`);
+    this.response = response;
+  }
+}
+
+/**
+ * Fetch JSON from a URL and return an ApiResponse.
+ * Throws ApiError on non-2xx status codes.
+ */
+const fetchJson = async <T = any>(
+  url: string,
+  init?: globalThis.RequestInit,
+): Promise<ApiResponse<T>> => {
+  const response = await fetch(url, init);
+  const data = await response.json();
+  const result: ApiResponse<T> = {
+    data,
+    status: response.status,
+    statusText: response.statusText,
+  };
+  if (!response.ok) {
+    throw new ApiError(result);
+  }
+  return result;
+};
+
+/**
  * Send GraphQL request to GitHub API.
  */
 const request = (
-  data: AxiosRequestConfig["data"],
-  headers: AxiosRequestConfig["headers"],
-): Promise<any> => {
-  return axios({
-    url: "https://api.github.com/graphql",
-    method: "post",
+  data: Record<string, unknown>,
+  headers: Record<string, string>,
+): Promise<ApiResponse> => {
+  return fetchJson("https://api.github.com/graphql", {
+    method: "POST",
     headers,
-    data,
+    body: JSON.stringify(data),
   });
 };
 
@@ -552,6 +591,7 @@ export {
   isValidGradient,
   fallbackColor,
   request,
+  fetchJson,
   flexLayout,
   getCardColors,
   wrapTextMultiline,
@@ -565,3 +605,5 @@ export {
   parseEmojis,
   dateDiff,
 };
+export { ApiError };
+export type { ApiResponse };

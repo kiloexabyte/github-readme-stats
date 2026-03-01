@@ -1,12 +1,11 @@
 import { jest } from "@jest/globals";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import api from "../api/index.js";
 import { calculateRank } from "../src/calculateRank.js";
 import { renderStatsCard } from "../src/cards/stats-card.js";
 import { CONSTANTS, renderError } from "../src/common/utils.js";
 import { expect, it, describe, afterEach } from "@jest/globals";
+import FetchMock from "./fetchMock.js";
 
 const stats = {
   name: "Anurag Hazra",
@@ -75,7 +74,7 @@ const error = {
   ],
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 const faker = (query, data) => {
   const req = {

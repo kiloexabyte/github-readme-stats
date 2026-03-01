@@ -1,8 +1,7 @@
 import "@testing-library/jest-dom";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import { fetchRepo } from "../src/fetchers/repo-fetcher.js";
 import { expect, it, describe, afterEach } from "@jest/globals";
+import FetchMock from "./fetchMock.js";
 
 const data_repo = {
   repository: {
@@ -32,7 +31,7 @@ const data_org = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 afterEach(() => {
   mock.reset();

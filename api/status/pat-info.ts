@@ -6,7 +6,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import type { AxiosResponse } from "axios";
+import type { ApiResponse } from "../../src/common/utils.js";
 import { logger, request, dateDiff } from "../../src/common/utils.js";
 export const RATE_LIMIT_SECONDS = 60 * 5; // 1 request per 5 minutes
 
@@ -16,7 +16,7 @@ export const RATE_LIMIT_SECONDS = 60 * 5; // 1 request per 5 minutes
 const uptimeFetcher = (
   variables: any,
   token: string,
-): Promise<AxiosResponse> => {
+): Promise<ApiResponse> => {
   return request(
     {
       query: `
@@ -38,7 +38,7 @@ const getAllPATs = (): string[] => {
   return Object.keys(process.env).filter((key) => /PAT_\d*$/.exec(key));
 };
 
-type Fetcher = (variables: any, token: string) => Promise<AxiosResponse>;
+type Fetcher = (variables: any, token: string) => Promise<ApiResponse>;
 type PATInfo = {
   validPATs: string[];
   expiredPATs: string[];

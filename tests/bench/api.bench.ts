@@ -1,9 +1,8 @@
 import { benchmarkSuite } from "jest-bench";
 import api from "../../api/index.js";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { jest } from "@jest/globals";
+import FetchMock from "../fetchMock.js";
 
 const stats = {
   name: "Anurag Hazra",
@@ -50,7 +49,7 @@ const data_stats = {
   },
 };
 
-const mock = new MockAdapter(axios as any);
+const mock = new FetchMock();
 
 const faker = (query, data) => {
   const req = {

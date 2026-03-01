@@ -1,6 +1,6 @@
 import { request, MissingParamError } from "../common/utils.js";
 import { retryer } from "../common/retryer.js";
-import type { AxiosRequestHeaders, AxiosResponse } from "axios";
+import type { ApiResponse } from "../common/utils.js";
 import type { GistData } from "./types.js";
 
 const QUERY = `
@@ -35,9 +35,9 @@ query gistInfo($gistName: String!) {
  * @returns {Promise<AxiosResponse>} The response.
  */
 const fetcher = async (
-  variables: AxiosRequestHeaders,
+  variables: Record<string, string>,
   token: string,
-): Promise<AxiosResponse> => {
+): Promise<ApiResponse> => {
   return await request(
     { query: QUERY, variables },
     { Authorization: `token ${token}` },
