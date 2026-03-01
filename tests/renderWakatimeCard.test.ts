@@ -1,9 +1,8 @@
+import { describe, it, expect } from "bun:test";
 import { queryByTestId } from "@testing-library/dom";
-import "@testing-library/jest-dom";
 import { renderWakatimeCard } from "../src/cards/wakatime-card.js";
 import { getCardColors } from "../src/common/utils.js";
 import { wakaTimeData } from "./fetchWakatime.test.js";
-import { expect, it, describe } from "@jest/globals";
 
 describe("Test Render WakaTime Card", () => {
   it("should render correctly", () => {

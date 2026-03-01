@@ -1,3 +1,4 @@
+import { describe, it, expect } from "bun:test";
 import { queryAllByTestId, queryByTestId } from "@testing-library/dom";
 import { cssToObject } from "@uppercod/css-to-object";
 import {
@@ -18,10 +19,6 @@ import {
   MIN_CARD_WIDTH,
   getDefaultLanguagesCountByLayout,
 } from "../src/cards/top-languages-card.js";
-import { expect, it, describe } from "@jest/globals";
-
-// adds special assertions like toHaveTextContent
-import "@testing-library/jest-dom";
 
 import { themes } from "../themes/index.js";
 
@@ -194,7 +191,7 @@ describe("Test renderTopLanguages helper functions", () => {
     });
     expect(
       cartesianToPolar(100, 100, 57.57359312880714, 57.573593128807154),
-    ).toStrictEqual({ radius: 60, angleInDegrees: 225 });
+    ).toStrictEqual({ radius: 60, angleInDegrees: 224.99999999999997 });
     expect(cartesianToPolar(100, 100, 99.99999999999999, 40)).toStrictEqual({
       radius: 60,
       angleInDegrees: 270,

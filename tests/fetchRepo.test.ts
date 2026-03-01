@@ -1,6 +1,5 @@
-import "@testing-library/jest-dom";
+import { afterEach, describe, it, expect } from "bun:test";
 import { fetchRepo } from "../src/fetchers/repo-fetcher.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const data_repo = {

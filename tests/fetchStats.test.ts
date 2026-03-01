@@ -1,7 +1,6 @@
-import "@testing-library/jest-dom";
+import { afterEach, beforeEach, describe, it, expect } from "bun:test";
 import { calculateRank } from "../src/calculateRank.js";
 import { fetchStats } from "../src/fetchers/stats-fetcher.js";
-import { expect, it, describe, beforeEach, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 // Test parameters.

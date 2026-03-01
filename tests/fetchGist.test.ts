@@ -1,5 +1,4 @@
-import "@testing-library/jest-dom";
-import { expect, it, describe, afterEach } from "@jest/globals";
+import { afterEach, describe, it, expect } from "bun:test";
 import { fetchGist } from "../src/fetchers/gist-fetcher.js";
 import FetchMock from "./fetchMock.js";
 

@@ -1,9 +1,8 @@
+import { describe, it, expect } from "bun:test";
 import { renderGistCard } from "../src/cards/gist-card";
-import { describe, expect, it } from "@jest/globals";
 import { queryByTestId } from "@testing-library/dom";
 import { cssToObject } from "@uppercod/css-to-object";
 import { themes } from "../themes/index.js";
-import "@testing-library/jest-dom";
 
 /**
  * @type {import("../src/fetchers/gist-fetcher").GistData}

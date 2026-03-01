@@ -4,10 +4,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { jest } from "@jest/globals";
+import { jest, afterEach, beforeAll, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import patInfo, { RATE_LIMIT_SECONDS } from "../api/status/pat-info.js";
-import { expect, it, describe, afterEach, beforeAll } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const mock = new FetchMock();

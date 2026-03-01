@@ -1,6 +1,7 @@
 /**
  * @file Contains end-to-end tests for the Vercel preview instance.
  */
+import { beforeAll, describe, test, expect } from "bun:test";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,7 +10,6 @@ import { renderStatsCard } from "../../src/cards/stats-card.js";
 import { renderTopLanguages } from "../../src/cards/top-languages-card.js";
 import { renderWakatimeCard } from "../../src/cards/wakatime-card.js";
 import { renderGistCard } from "../../src/cards/gist-card.js";
-import { expect, describe, beforeAll, test } from "@jest/globals";
 
 const REPO = "curly-fiesta";
 const USER = "catelinemnemosyne";
@@ -103,7 +103,7 @@ const GIST_DATA = {
 
 const CACHE_BURST_STRING = `v=${new Date().getTime()}`;
 
-describe("Fetch Cards", () => {
+describe.skipIf(!process.env.VERCEL_PREVIEW_URL)("Fetch Cards", () => {
   let VERCEL_PREVIEW_URL;
 
   beforeAll(() => {

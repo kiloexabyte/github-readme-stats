@@ -1,3 +1,4 @@
+import { describe, it, expect } from "bun:test";
 import {
   getByTestId,
   queryAllByTestId,
@@ -5,11 +6,7 @@ import {
 } from "@testing-library/dom";
 import { cssToObject } from "@uppercod/css-to-object";
 import { renderStatsCard } from "../src/cards/stats-card.js";
-import { expect, it, describe } from "@jest/globals";
 import { CustomError } from "../src/common/utils.js";
-
-// adds special assertions like toHaveTextContent
-import "@testing-library/jest-dom";
 
 import { themes } from "../themes/index.js";
 

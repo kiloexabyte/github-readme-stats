@@ -1,5 +1,5 @@
+import { describe, it, expect } from "bun:test";
 import { flexLayout } from "../src/common/utils.js";
-import { expect, it, describe } from "@jest/globals";
 
 describe("flexLayout", () => {
   it("should work with row & col layouts", () => {

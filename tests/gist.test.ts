@@ -1,7 +1,5 @@
-import { jest } from "@jest/globals";
-import "@testing-library/jest-dom";
+import { jest, afterEach, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import { renderGistCard } from "../src/cards/gist-card.js";
 import { renderError } from "../src/common/utils.js";
 import gist from "../api/gist.js";

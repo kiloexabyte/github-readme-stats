@@ -1,9 +1,7 @@
-import { jest } from "@jest/globals";
-import "@testing-library/jest-dom";
+import { jest, afterEach, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import wakatime from "../api/wakatime.js";
 import { renderWakatimeCard } from "../src/cards/wakatime-card.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const wakaTimeData = {

@@ -1,10 +1,8 @@
-import { jest } from "@jest/globals";
-import "@testing-library/jest-dom";
+import { jest, afterEach, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import topLangs from "../api/top-langs.js";
 import { renderTopLanguages } from "../src/cards/top-languages-card.js";
 import { renderError } from "../src/common/utils.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const data_langs = {

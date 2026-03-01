@@ -1,6 +1,5 @@
-import "@testing-library/jest-dom";
+import { afterEach, describe, it, expect } from "bun:test";
 import { fetchTopLanguages } from "../src/fetchers/top-languages-fetcher.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const mock = new FetchMock();

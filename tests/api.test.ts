@@ -1,10 +1,9 @@
-import { jest } from "@jest/globals";
+import { jest, afterEach, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import api from "../api/index.js";
 import { calculateRank } from "../src/calculateRank.js";
 import { renderStatsCard } from "../src/cards/stats-card.js";
 import { CONSTANTS, renderError } from "../src/common/utils.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const stats = {

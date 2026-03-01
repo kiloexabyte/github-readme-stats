@@ -1,10 +1,9 @@
 /**
  * @file Tests for the status/up cloud function.
  */
-import { jest } from "@jest/globals";
+import { jest, afterEach, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import up, { RATE_LIMIT_SECONDS } from "../api/status/up.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const mock = new FetchMock();

@@ -1,10 +1,8 @@
-import { jest } from "@jest/globals";
-import "@testing-library/jest-dom";
+import { jest, afterEach, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import pin from "../api/pin.js";
 import { renderRepoCard } from "../src/cards/repo-card.js";
 import { renderError } from "../src/common/utils.js";
-import { expect, it, describe, afterEach } from "@jest/globals";
 import FetchMock from "./fetchMock.js";
 
 const data_repo = {
