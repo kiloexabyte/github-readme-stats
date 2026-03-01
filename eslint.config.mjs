@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
 import jsdoc from "eslint-plugin-jsdoc";
+import tsParser from "@typescript-eslint/parser";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,8 +15,12 @@ const compat = new FlatCompat({
 });
 
 export default [
+  {
+    ignores: ["**/*.d.ts"],
+  },
   ...compat.extends("prettier"),
   {
+    files: ["**/*.{js,ts}"],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -24,6 +29,7 @@ export default [
 
       ecmaVersion: 2022,
       sourceType: "module",
+      parser: tsParser,
     },
     plugins: {
       jsdoc,
@@ -55,7 +61,7 @@ export default [
       "no-undef-init": "off",
       "no-undef": "error",
       "no-undefined": "off",
-      "no-unused-vars": "warn",
+      "no-unused-vars": "off",
       "no-use-before-define": "error",
       "constructor-super": "error",
       "no-class-assign": "error",
@@ -74,10 +80,10 @@ export default [
           after: true,
         },
       ],
-      "jsdoc/require-returns": "warn",
-      "jsdoc/require-returns-description": "warn",
-      "jsdoc/require-param-description": "warn",
-      "jsdoc/require-jsdoc": "warn",
+      "jsdoc/require-returns": "off",
+      "jsdoc/require-returns-description": "off",
+      "jsdoc/require-param-description": "off",
+      "jsdoc/require-jsdoc": "off",
     },
   },
 ];

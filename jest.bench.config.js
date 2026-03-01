@@ -11,6 +11,13 @@ export default {
   // always include "default" reporter along with Jest-bench reporter
   // for error reporting
   reporters: ["default", "jest-bench/reporter"],
-  // will pick up "*.bench.js" file.
+  // will pick up "*.bench.ts" file.
   testRegex: "(\\.bench)\\.(ts|tsx|js)$",
+  transform: {
+    "^.+\\.tsx?$": ["ts-jest", { useESM: true }],
+  },
+  extensionsToTreatAsEsm: [".ts"],
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+  },
 };

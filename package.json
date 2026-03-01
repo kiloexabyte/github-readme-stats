@@ -8,7 +8,7 @@
     "cards",
     "card-generator"
   ],
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "type": "module",
   "homepage": "https://github.com/anuraghazra/github-readme-stats",
   "bugs": {
@@ -23,14 +23,16 @@
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "test:update:snapshot": "node --experimental-vm-modules node_modules/jest/bin/jest.js -u",
     "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.e2e.config.js",
-    "theme-readme-gen": "node scripts/generate-theme-doc",
-    "preview-theme": "node scripts/preview-theme",
-    "close-stale-theme-prs": "node scripts/close-stale-theme-prs",
-    "generate-langs-json": "node scripts/generate-langs-json",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx express.ts",
+    "theme-readme-gen": "tsx scripts/generate-theme-doc.ts",
+    "preview-theme": "tsx scripts/preview-theme.ts",
+    "close-stale-theme-prs": "tsx scripts/close-stale-theme-prs.ts",
+    "generate-langs-json": "tsx scripts/generate-langs-json.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "lint": "npx eslint --max-warnings 0 \"./src/**/*.js\" \"./scripts/**/*.js\" \"./tests/**/*.js\" \"./api/**/*.js\" \"./themes/**/*.js\"",
+    "lint": "npx eslint --max-warnings 0 \"./src/**/*.ts\" \"./scripts/**/*.ts\" \"./tests/**/*.ts\" \"./api/**/*.ts\" \"./themes/**/*.ts\"",
     "bench": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.bench.config.js"
   },
   "author": "Anurag Hazra",
@@ -42,7 +44,11 @@
     "@eslint/js": "^9.29.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.3",
+    "@typescript-eslint/parser": "^8.56.1",
     "@uppercod/css-to-object": "^1.1.1",
+    "@vercel/node": "^5.6.9",
     "axios-mock-adapter": "^2.1.0",
     "color-contrast-checker": "^2.1.0",
     "eslint": "^9.29.0",
@@ -58,18 +64,22 @@
     "lint-staged": "^15.5.1",
     "lodash.snakecase": "^4.1.1",
     "parse-diff": "^0.11.1",
-    "prettier": "^3.6.0"
+    "prettier": "^3.6.0",
+    "ts-jest": "^29.4.6",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "axios": "^1.10.0",
     "dotenv": "^16.5.0",
     "emoji-name-map": "^1.2.8",
+    "express": "^5.2.1",
     "github-username-regex": "^1.0.0",
     "upgrade": "^1.1.0",
     "word-wrap": "^1.2.5"
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "*.{ts,js,css,md}": "prettier --write"
   },
   "engines": {
     "node": ">=18.0.0"
