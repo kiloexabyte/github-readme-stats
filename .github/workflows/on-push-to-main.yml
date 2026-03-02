@@ -1,0 +1,16 @@
+name: On Push To Main
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: kiloexabyte/runner-image:latest
+    steps:
+    - uses: actions/checkout@v6
