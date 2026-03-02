@@ -24,7 +24,7 @@
     "test:update:snapshot": "bun test --update-snapshots",
     "test:e2e": "bun test tests/e2e/",
     "typecheck": "bunx tsc --noEmit",
-    "dev": "bun express.ts",
+    "dev": "bun server.ts",
     "theme-readme-gen": "bun scripts/generate-theme-doc.ts",
     "preview-theme": "bun scripts/preview-theme.ts",
     "close-stale-theme-prs": "bun scripts/close-stale-theme-prs.ts",
@@ -43,7 +43,6 @@
     "@eslint/js": "^9.29.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@types/express": "^5.0.6",
     "@types/jsdom": "^28.0.0",
     "@types/node": "^25.3.3",
     "@typescript-eslint/parser": "^8.56.1",
@@ -67,7 +66,6 @@
   "dependencies": {
     "dotenv": "^16.5.0",
     "emoji-name-map": "^1.2.8",
-    "express": "^5.2.1",
     "github-username-regex": "^1.0.0",
     "upgrade": "^1.1.0",
     "word-wrap": "^1.2.5"
