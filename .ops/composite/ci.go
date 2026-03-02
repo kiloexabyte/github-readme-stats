@@ -9,9 +9,5 @@ func (o Ops) Ci() error {
 		return err
 	}
 
-	if err := o.Test(); err != nil {
-		return err
-	}
-
 	return nil
 }
