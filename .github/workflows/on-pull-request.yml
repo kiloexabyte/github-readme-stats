@@ -13,3 +13,4 @@ jobs:
       image: kiloexabyte/runner-image:latest
     steps:
       - uses: actions/checkout@v6
+      - run: op ci
