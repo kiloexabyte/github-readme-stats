@@ -24,7 +24,7 @@ linters:
     rules:
       - linters:
           - errcheck
-        source: 'defer '
+        source: "defer "
     paths:
       - third_party$
       - builtin$

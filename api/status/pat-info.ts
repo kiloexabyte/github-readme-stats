@@ -13,10 +13,7 @@ export const RATE_LIMIT_SECONDS = 60 * 5; // 1 request per 5 minutes
 /**
  * Simple uptime check fetcher for the PATs.
  */
-const uptimeFetcher = (
-  variables: any,
-  token: string,
-): Promise<ApiResponse> => {
+const uptimeFetcher = (variables: any, token: string): Promise<ApiResponse> => {
   return request(
     {
       query: `
