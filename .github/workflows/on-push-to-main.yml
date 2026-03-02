@@ -14,4 +14,7 @@ jobs:
       image: kiloexabyte/runner-image:latest
     steps:
       - uses: actions/checkout@v6
-      - run: op ci
+      - name: Lint and Test
+        env: 
+          GOFLAGS: -buildvcs=false
+        run: op ci
