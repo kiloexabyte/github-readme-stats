@@ -14,6 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Lint and Test
-        env: 
+        env:
           GOFLAGS: -buildvcs=false
         run: op ci
