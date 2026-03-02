@@ -2,9 +2,6 @@
  * @file Contains end-to-end tests for the Vercel preview instance.
  */
 import { beforeAll, describe, test, expect } from "bun:test";
-import dotenv from "dotenv";
-dotenv.config();
-
 import { renderRepoCard } from "../../src/cards/repo-card.js";
 import { renderStatsCard } from "../../src/cards/stats-card.js";
 import { renderTopLanguages } from "../../src/cards/top-languages-card.js";

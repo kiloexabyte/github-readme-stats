@@ -1,4 +1,3 @@
-import * as dotenv from "dotenv";
 import githubUsernameRegex from "github-username-regex";
 import { calculateRank } from "../calculateRank.js";
 import { retryer } from "../common/retryer.js";
@@ -12,8 +11,6 @@ import {
 } from "../common/utils.js";
 import type { ApiResponse } from "../common/utils.js";
 import type { StatsData } from "./types.js";
-
-dotenv.config();
 
 // GraphQL queries.
 const GRAPHQL_REPOS_FIELD = `

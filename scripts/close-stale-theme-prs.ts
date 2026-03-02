@@ -1,9 +1,6 @@
 /**
  * @file Script that can be used to close stale theme PRs that have a `invalid` label.
  */
-import * as dotenv from "dotenv";
-dotenv.config();
-
 import { debug, setFailed } from "@actions/core";
 import github from "@actions/github";
 import { RequestError } from "@octokit/request-error";

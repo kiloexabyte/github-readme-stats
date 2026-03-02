@@ -1,9 +1,6 @@
 /**
  * @file Tests for the status/pat-info cloud function.
  */
-import dotenv from "dotenv";
-dotenv.config();
-
 import { jest, afterEach, beforeAll, describe, it, expect } from "bun:test";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import patInfo, { RATE_LIMIT_SECONDS } from "../api/status/pat-info.js";

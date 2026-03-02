@@ -1,4 +1,3 @@
-import "dotenv/config";
 import statsCard from "./api/index.js";
 import repoCard from "./api/pin.js";
 import langCard from "./api/top-langs.js";
